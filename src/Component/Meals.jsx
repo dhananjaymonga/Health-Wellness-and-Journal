@@ -107,7 +107,7 @@ const Meals = () => {
             onSubmit={(e) => handleSubmit(e, "Sleep")}
             className="p-6 bg-gradient-to-r from-purple-100 to-purple-200 rounded-lg shadow-md"
           >
-            <h2 className="text-2xl font-semibold mb-6">Log Sleep</h2>
+            <h2 className="text-2xl font-semibold mb-6">Sleep</h2>
             <div className={formStyles}>
               <label className={labelStyles}>Hours Slept</label>
               <input
