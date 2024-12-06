@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Meals from './Meals'
-import Graph from './Graph'
 import Footer from './Footer'
 import SleepDuration from './SleepDuration'
 import HealthHostic from './HealthHostic'
@@ -17,7 +16,7 @@ function Dailylogin () {
         <HealthHostic/>
         <MealSchdeule/>
         
-        {/* <Graph/> */}
+        
         <Footer/>
     </div>
   )

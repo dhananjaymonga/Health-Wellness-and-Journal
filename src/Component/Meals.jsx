@@ -1,254 +1,307 @@
-import React, { useState } from "react";
-import { useContext } from 'react';
-import {dataProvider} from "./Store"
-const Meals = () => {
-    let {data,setData} =useContext(dataProvider)
-    let {submissions,setSubmissions} =useContext(dataProvider)
+import React, { useState, useContext, createContext } from "react";
 
-//   let [data, setData] = useState({ name: "", meal: "", calories: "" });
+// Context for sharing data across components
+const dataProvider = createContext();
+
+const Meals = () => {
+  const { data, setData } = useContext(dataProvider);
+  const [allLogs, setAllLogs] = useState([]);
   const [activeTab, setActiveTab] = useState("Meal");
 
+  // Handle input field changes
   const handleChange = (e) => {
-   const {name , value } = e.target
-   setData({...data ,[name] : value })
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmissions([...submissions, data]);
-    console.log(data);
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
   };
 
+  // Handle form submissions
+  const handleSubmit = (e, category) => {
+    e.preventDefault();
+    const newLog = { category, ...data };
+    setAllLogs([newLog, ...allLogs]);
+    setData({});
+  };
+
+  // Generate form content based on active tab
   const renderContent = () => {
+    const formStyles = "mb-4";
+    const labelStyles = "block text-gray-700 font-medium mb-2";
+    const inputStyles =
+      "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400";
+    const textareaStyles =
+      "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400";
+
     switch (activeTab) {
       case "Meal":
         return (
-          <div className="flex-1 bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Log Meal</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Meal</label>
-                <input
-                  type="text"
-                  name="day"
-                  value={data.day}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              {" "}
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Calories</label>
-                <input
-                  type="number"
-                  name="calories"
-                  value={data.calories}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Meal</label>
-                <input
-                  type="text"
-                  name="meal"
-                  value={data.meal}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">BreakFast</label>
-                <input
-                  type="text"
-                  name="breakfast"
-                  value={data.breakfast}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Lunch</label>
-                <input
-                  type="text"
-                  name="lunch"
-                  value={data.lunch}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Dinner</label>
-                <input
-                  type="text"
-                  name="dinner"
-                  value={data.dinner}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Notes</label>
-                <textarea className="w-full p-2 border rounded h-24"></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-green-500 text-white py-2 rounded"
-              >
-                Log Meal
-              </button>
-            </form>
-            {submissions.map((val, idx) => {
-              return <h1 key={idx}>{val.name}</h1>;
-            })}
-          </div>
-        );
-      case "Activity":
-        return (
-          <div className="flex-1 bg-gradient-to-r from-blue-100 to-blue-200 p-6 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Log Activity</h2>
-            <form>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Activity</label>
-                <input type="text" className="w-full p-2 border rounded" />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">
-                  Duration (minutes)
-                </label>
-                <input type="number" className="w-full p-2 border rounded" />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Notes</label>
-                <textarea className="w-full p-2 border rounded h-24"></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded"
-              >
-                Log Activity
-              </button>
-            </form>
-          </div>
+          <form
+            onSubmit={(e) => handleSubmit(e, "Meal")}
+            className="p-6 bg-gradient-to-r from-green-100 to-green-200 rounded-lg shadow-md"
+          >
+            <h2 className="text-2xl font-semibold mb-6">Log Meal</h2>
+            <div className={formStyles}>
+              <label className={labelStyles}>Day</label>
+              <input
+                type="text"
+                name="day"
+                value={data.day || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., Monday"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Calories</label>
+              <input
+                type="number"
+                name="calories"
+                value={data.calories || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., 500"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Breakfast</label>
+              <input
+                type="text"
+                name="breakfast"
+                value={data.breakfast || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., Oatmeal"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Lunch</label>
+              <input
+                type="text"
+                name="lunch"
+                value={data.lunch || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., Salad"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Notes</label>
+              <textarea
+                name="notes"
+                value={data.notes || ""}
+                onChange={handleChange}
+                className={textareaStyles}
+                placeholder="E.g., Feeling energetic"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition"
+            >
+              Log Meal
+            </button>
+          </form>
         );
       case "Sleep":
         return (
-          <div className="flex-1 bg-gradient-to-r from-purple-100 to-purple-200 p-6 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Log Sleep</h2>
-            <form>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Hours Slept</label>
-                <input type="number" className="w-full p-2 border rounded" />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Quality</label>
-                <select className="w-full p-2 border rounded">
-                  <option>Good</option>
-                  <option>Average</option>
-                  <option>Poor</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Notes</label>
-                <textarea className="w-full p-2 border rounded h-24"></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-purple-500 text-white py-2 rounded"
+          <form
+            onSubmit={(e) => handleSubmit(e, "Sleep")}
+            className="p-6 bg-gradient-to-r from-purple-100 to-purple-200 rounded-lg shadow-md"
+          >
+            <h2 className="text-2xl font-semibold mb-6">Log Sleep</h2>
+            <div className={formStyles}>
+              <label className={labelStyles}>Hours Slept</label>
+              <input
+                type="number"
+                name="hours"
+                value={data.hours || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., 8"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Quality</label>
+              <select
+                name="quality"
+                value={data.quality || ""}
+                onChange={handleChange}
+                className={inputStyles}
               >
-                Log Sleep
-              </button>
-            </form>
-          </div>
+                <option value="">Select Quality</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Poor">Poor</option>
+              </select>
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Notes</label>
+              <textarea
+                name="notes"
+                value={data.notes || ""}
+                onChange={handleChange}
+                className={textareaStyles}
+                placeholder="E.g., Woke up refreshed"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-purple-500 text-white py-3 rounded-lg hover:bg-purple-600 transition"
+            >
+              Log Sleep
+            </button>
+          </form>
+        );
+      case "Activity":
+        return (
+          <form
+            onSubmit={(e) => handleSubmit(e, "Activity")}
+            className="p-6 bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg shadow-md"
+          >
+            <h2 className="text-2xl font-semibold mb-6">Log Activity</h2>
+            <div className={formStyles}>
+              <label className={labelStyles}>Activity Type</label>
+              <input
+                type="text"
+                name="activityType"
+                value={data.activityType || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., Running"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Duration (Minutes)</label>
+              <input
+                type="number"
+                name="duration"
+                value={data.duration || ""}
+                onChange={handleChange}
+                className={inputStyles}
+                placeholder="E.g., 30"
+              />
+            </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Notes</label>
+              <textarea
+                name="notes"
+                value={data.notes || ""}
+                onChange={handleChange}
+                className={textareaStyles}
+                placeholder="E.g., Felt great"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition"
+            >
+              Log Activity
+            </button>
+          </form>
         );
       case "Mood":
         return (
-          <div className="flex-1 bg-gradient-to-r from-yellow-100 to-yellow-200 p-6 rounded-lg">
-            <div className="w-full md:w-3/2 bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-lg p-6">
-              <h2 className="text-2xl font-bold text-orange-700 mb-4">
-                Mood Tracker
-              </h2>
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="flex flex-col items-center">
-                  <i className="fas fa-sun text-yellow-500 text-4xl mb-2"></i>
-                  <span>Happy</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <i className="fas fa-cloud text-gray-500 text-4xl mb-2"></i>
-                  <span>Neutral</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <i className="fas fa-moon text-blue-500 text-4xl mb-2"></i>
-                  <span>Calm</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <i className="fas fa-sad-tear text-red-500 text-4xl mb-2"></i>
-                  <span>Sad</span>
-                </div>
-              </div>
-              <button className="w-full py-2 bg-orange-500 text-white rounded-lg">
-                Log Mood
-              </button>
+          <form
+            onSubmit={(e) => handleSubmit(e, "Mood")}
+            className="p-6 bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-lg shadow-md"
+          >
+            <h2 className="text-2xl font-semibold mb-6">Log Mood</h2>
+            <div className={formStyles}>
+              <label className={labelStyles}>Mood</label>
+              <select
+                name="mood"
+                value={data.mood || ""}
+                onChange={handleChange}
+                className={inputStyles}
+              >
+                <option value="">Select Mood</option>
+                <option value="Happy">Happy</option>
+                <option value="Neutral">Neutral</option>
+                <option value="Sad">Sad</option>
+              </select>
             </div>
-          </div>
+            <div className={formStyles}>
+              <label className={labelStyles}>Notes</label>
+              <textarea
+                name="notes"
+                value={data.notes || ""}
+                onChange={handleChange}
+                className={textareaStyles}
+                placeholder="E.g., Feeling relaxed"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition"
+            >
+              Log Mood
+            </button>
+          </form>
         );
       default:
         return null;
     }
   };
 
+  // Display recent logs dynamically
+  const renderRecentLogs = () => {
+    return allLogs.slice(0, 5).map((log, idx) => (
+      <li
+        key={idx}
+        className={`p-4 rounded-lg shadow-md ${
+          idx % 2 === 0 ? "bg-gray-100" : "bg-white"
+        }`}
+      >
+        <h4 className="font-bold text-lg text-gray-700 border-b pb-2 mb-2">
+          {log.category}
+        </h4>
+        {Object.entries(log)
+          .filter(([key]) => key !== "category")
+          .map(([key, value]) => (
+            <p key={key} className="text-gray-600 mb-1">
+              <strong className="capitalize text-gray-800">{key}:</strong>{" "}
+              {value}
+            </p>
+          ))}
+      </li>
+    ));
+  };
+
   return (
-    <div className=" w-full  border-2  mt-2 ">
-      <div>
-        <h1 className="text-2xl font-semibold mb-2">Daily Log</h1>
-        <p className="text-gray-500 mb-4">
-          Track your meals, activities, sleep, and mood
-        </p>
-        <div className="flex border-b mb-4 ">
+    <div className="container mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-8 text-center">
+        Health and Wellness Journal
+      </h1>
+      <div className="flex justify-center mb-8">
+        {["Meal", "Sleep", "Activity", "Mood"].map((tab) => (
           <button
-            onClick={() => setActiveTab("Meal")}
-            className={`flex-1 py-2 px-4 text-center border-r ${
-              activeTab === "Meal" ? "bg-gray-100" : ""
-            }`}
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`py-2 px-6 mx-2 rounded-lg ${
+              activeTab === tab
+                ? "bg-blue-500 text-white shadow-md"
+                : "bg-gray-100 text-gray-800"
+            } hover:bg-blue-400 hover:text-white transition`}
           >
-            Meal
+            {tab}
           </button>
-          <button
-            onClick={() => setActiveTab("Activity")}
-            className={`flex-1 py-2 px-4 text-center border-r ${
-              activeTab === "Activity" ? "bg-gray-100" : ""
-            }`}
-          >
-            Activity
-          </button>
-          <button
-            onClick={() => setActiveTab("Sleep")}
-            className={`flex-1 py-2 px-4 text-center border-r ${
-              activeTab === "Sleep" ? "bg-gray-100" : ""
-            }`}
-          >
-            Sleep
-          </button>
-          <button
-            onClick={() => setActiveTab("Mood")}
-            className={`flex-1 py-2 px-4 text-center ${
-              activeTab === "Mood" ? "bg-gray-100" : ""
-            }`}
-          >
-            Mood
-          </button>
-        </div>
-        <div className="flex flex-col md:flex-row ">
-          <div className="flex-1 flex items-center justify-center bg-gray-100 p-4 rounded-lg mb-4 md:mb-0 md:mr-4">
-            <div className="w-3/4 h-64 flex items-center justify-center bg-gray-200 rounded-lg">
-              <i className="fas fa-camera text-gray-400 text-4xl"></i>
-            </div>
-          </div>
-          {renderContent()}
-        </div>
+        ))}
+      </div>
+      {renderContent()}
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Recent Logs</h2>
+        <ul className="space-y-4">{renderRecentLogs()}</ul>
       </div>
     </div>
   );
 };
-//
 
-export default Meals;
+const App = () => {
+  const [data, setData] = useState({});
+  return (
+    <dataProvider.Provider value={{ data, setData }}>
+      <Meals />
+    </dataProvider.Provider>
+  );
+};
+
+export default App;

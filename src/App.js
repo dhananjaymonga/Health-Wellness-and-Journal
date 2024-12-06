@@ -5,7 +5,7 @@ import Mainpoint from './Component/Mainpoint'
 import Howitswork from './Component/Howitswork'
 import Footer from './Component/Footer'
 import TakeControl from './Component/TakeControl'
-import Paras from './Component/Paras'
+// import Paras from './Component/Paras'
 function App() {
   return (
     <div>

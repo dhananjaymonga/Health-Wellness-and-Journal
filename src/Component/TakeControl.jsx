@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function TakeControl() {
   return (
@@ -7,9 +8,8 @@ function TakeControl() {
     <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-6">
         By consistently logging your daily activities, you'll be empowered to make informed decisions about your lifestyle. Our Health & Wellness Journal is your partner in achieving a healthier, more balanced life.
     </p>
-    <button className="bg-black text-white py-2 px-4 rounded">
-        Start Logging Today
-    </button>
+    
+    
 </div></div>
   )
 }
