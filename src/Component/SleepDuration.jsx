@@ -12,14 +12,14 @@ const SleepDuration = () => {
   return (
     <><div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
     <div className="bg-white p-4 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-2">Sleep Duration</h2>
-        <p className="text-gray-600 mb-4">Hours of sleep per night</p>
-        <img src="/images/calorie_intake.png alt="Bar chart showing sleep duration for Mon, Wed, Fri, Sun" />
-    </div>
-    <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-2">Calorie Intake</h2>
         <p className="text-gray-600 mb-4">Daily calorie consumption</p>
         <img src="/images/calorie_intake.png" alt="Line chart showing calorie intake for Mon, Wed, Fri, Sun" className='h-[240px] w-[400px]'/>
+    </div>
+    <div className="bg-white p-4 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-2">Sleep Duration</h2>
+        <p className="text-gray-600 mb-4">Hours of sleep per night</p>
+        <img src="/images/calorie_intake.png alt="Bar chart showing sleep duration for  />
     </div>
     <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-2 text-blue-600">Recent Logs</h2>
