@@ -70,9 +70,7 @@ const SleepDuration = () => {
                 <p>Feeling happy</p>
             </div>
         </div>
-    {/* </div> */}
- 
-{/* </div> */}
+
 </>
   )
 }

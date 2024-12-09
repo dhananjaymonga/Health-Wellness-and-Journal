@@ -5,7 +5,6 @@ import Mainpoint from './Component/Mainpoint'
 import Howitswork from './Component/Howitswork'
 import Footer from './Component/Footer'
 import TakeControl from './Component/TakeControl'
-import Experience from './Component/Experience'
 function App() {
   return (
     <div>

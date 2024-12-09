@@ -14,8 +14,7 @@ function Dailylogin () {
         <SleepDuration/>
         <HealthTracking/>
         <HealthHostic/>
-        <MealSchdeule/>
-      
+        <MealSchdeule/>      
         <Footer/>
     </div>
   )
