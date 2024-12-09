@@ -6,7 +6,7 @@ const HealthTracking = () => {
     <h1 className="text-2xl font-bold mb-4">Health Tracking Importance</h1>
     <div className="flex flex-col lg:flex-row">
         <div className="bg-gray-200 rounded-lg w-full lg:w-1/3 h-64 flex items-center justify-center mb-4 lg:mb-0 lg:mr-4">
-            <img src="images/image_4.png" alt="Placeholder image for health tracking" className="w-full h-full object-cover rounded-lg" />
+            <img src="/images/image_4.png" alt="Placeholder image for health tracking" className="w-full h-full object-cover rounded-lg" />
         </div>
         <div className="w-full lg:w-2/3">
             <p className="mb-4">
