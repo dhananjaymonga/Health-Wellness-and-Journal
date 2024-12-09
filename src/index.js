@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter,createBrowserRouter,RouterProvider } from 'react-router-dom';
 import Daillogin from './Component/Daillogin';
 import Store from './Component/Store';
+import Experience from "./Component/Experience"
+import Achievements from './Component/Timepas';
 
 const router=createBrowserRouter([
   {
@@ -15,6 +17,10 @@ const router=createBrowserRouter([
   {
     path:"/dAilylogin", 
     element:<Daillogin/>
+  },
+  {
+    path:"/experience", 
+    element:<Achievements/>
   }
 ])
  ReactDOM.createRoot(document.getElementById('root')).render(
