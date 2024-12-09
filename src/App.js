@@ -16,10 +16,8 @@ function App() {
       <Mainpoint/>
       
       <Howitswork/>
-      {/* <Slider></Slider> */}
       <TakeControl/> 
       <Footer/>
-      {/* <Paras/> */}
     </div>
 
   )
