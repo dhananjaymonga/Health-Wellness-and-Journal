@@ -16,7 +16,7 @@ function App() {
       <Mainpoint/>
       
       <Howitswork/>
-      <Slider></Slider>
+      {/* <Slider></Slider> */}
       <TakeControl/> 
       <Footer/>
       {/* <Paras/> */}
