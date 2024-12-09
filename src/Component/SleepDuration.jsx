@@ -19,7 +19,7 @@ const SleepDuration = () => {
     <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-2">Sleep Duration</h2>
         <p className="text-gray-600 mb-4">Hours of sleep per night </p>
-        <img src="/images/sleep_tracking.png" alt="Line chart showing calorie intake for Mon, Wed, Fri, Sun" className='h-[240px] w-[400px]'/>
+        <img src="/images/calorie_intake.png" alt="Line chart showing calorie intake for Mon, Wed, Fri, Sun" className='h-[240px] w-[400px]'/>
     </div>
     {/* <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-2">Sleep Duration</h2>
