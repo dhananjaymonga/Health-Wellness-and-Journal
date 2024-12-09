@@ -14,7 +14,7 @@ const SleepDuration = () => {
     <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-2">Sleep Duration</h2>
         <p className="text-gray-600 mb-4">Hours of sleep per night</p>
-        <img src="/images/sleep_chart.png" alt="Bar chart showing sleep duration for Mon, Wed, Fri, Sun" />
+        <img src="/images/calorie_intake.png alt="Bar chart showing sleep duration for Mon, Wed, Fri, Sun" />
     </div>
     <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-2">Calorie Intake</h2>
